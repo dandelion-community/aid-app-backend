@@ -11,7 +11,6 @@ from graphql_jwt.decorators import login_required  # type: ignore
 from .models import AidRequest
 
 
-
 class AidRequestType(DjangoObjectType):
     class Meta:
         model = AidRequest
@@ -44,16 +43,28 @@ class CreateAidRequest(graphene.Mutation):
 
     request = graphene.Field(AidRequestType)
 
-    @login_required
+    # @login_required
     def mutate(self, info, who_wants_it, what_is_it):
-        new_request = AidRequest(
-            what_is_needed=what_is_it,
-            zip_code=1,
-            who_is_it_for_freeform_text=who_wants_it,
-            who_recorded_it_username=info.context.user.username,
-        )
-        new_request.save()
-        return CreateAidRequest(request=new_request)
+        old_get_email_context = UserStatus.get_email_context
+
+        def new_get_email_context(self, info, path, action, **kwargs):
+            values = old_get_email_context(self, info, path, action, **kwargs)
+            logger = logging.getLogger('testlogger')
+            logger.info('Values returned: ' + repr(values))
+            return values
+
+        UserStatus.get_email_context = new_get_email_context
+        logger = logging.getLogger('testlogger')
+        logger.info('hello world')
+        return
+        # new_request = AidRequest(
+        #     what_is_needed=what_is_it,
+        #     zip_code=1,
+        #     who_is_it_for_freeform_text=who_wants_it,
+        #     who_recorded_it_username=info.context.user.username,
+        # )
+        # new_request.save()
+        # return CreateAidRequest(request=new_request)
 
 
 class UpdateIsRequestComplete(graphene.Mutation):

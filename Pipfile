@@ -4,13 +4,15 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-gunicorn = "*"
-django-heroku = "*"
 Django = "*"
-graphene-django = "*"
+django-cors-headers = "*"
 django-filter = "*"
 django-graphql-auth = "*"
-django-cors-headers = "*"
+django-heroku = "*"
+graphene-django = "*"
+gunicorn = "*"
+django-graphql-jwt = "*"
+django-registration = "*"
 
 [dev-packages]
 django-stubs = "*"

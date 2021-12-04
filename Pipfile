@@ -8,9 +8,9 @@ gunicorn = "*"
 django-heroku = "*"
 Django = "*"
 django-stubs = "*"
-mypy = "*"
 
 [dev-packages]
+mypy = "*"
 
 [requires]
 python_version = "3.10"

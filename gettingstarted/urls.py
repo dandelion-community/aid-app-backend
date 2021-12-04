@@ -1,10 +1,11 @@
-from django.urls import path, include
-
+import hello.views
 from django.contrib import admin
+from django.urls import include, path
+from django.views.decorators.csrf import csrf_exempt
+from graphene_django.views import GraphQLView  # type: ignore
 
 admin.autodiscover()
 
-import hello.views
 
 # To add a new path, first import the app:
 # import blog
@@ -18,4 +19,5 @@ urlpatterns = [
     path("", hello.views.index, name="index"),
     path("db/", hello.views.db, name="db"),
     path("admin/", admin.site.urls),
+    path("graphql", csrf_exempt(GraphQLView.as_view(graphiql=True))),
 ]

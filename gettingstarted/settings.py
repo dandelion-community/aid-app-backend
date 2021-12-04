@@ -10,7 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
+from graphql_auth.models import UserStatus
 import os
+from datetime import timedelta
 
 import django_heroku
 
@@ -55,6 +57,22 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+AUTHENTICATION_BACKENDS = [
+    'graphql_auth.backends.GraphQLAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+GRAPHQL_JWT = {
+    "JWT_VERIFY_EXPIRATION": True,
+    "JWT_LONG_RUNNING_REFRESH_TOKEN": True,
+    "JWT_ALLOW_ANY_CLASSES": [
+        "graphql_auth.mutations.Register",
+        "graphql_auth.mutations.VerifyAccount",
+    ],
+    "JWT_EXPIRATION_DELTA": timedelta(days=365000),
+    "JWT_REFRESH_EXPIRATION_DELTA": timedelta(days=365000),
+}
 
 ROOT_URLCONF = "gettingstarted.urls"
 
@@ -144,6 +162,10 @@ LOGGING = {
         'django.db.backends': {
             'level': 'DEBUG',
             'handlers': ['console'],
+        },
+        'testlogger': {
+            'handlers': ['console'],
+            'level': 'INFO',
         }
     }
 }
@@ -168,7 +190,23 @@ LOGGING = {
 # EMAIL_HOST_PASSWORD = MAILGUN_SMTP_PASSWORD
 # EMAIL_USE_TLS = True
 
-EMAIL_HOST = os.environ.get('MAILGUN_SMTP_SERVER', '')
-EMAIL_PORT = os.environ.get('MAILGUN_SMTP_PORT', '')
-EMAIL_HOST_USER = os.environ.get('MAILGUN_SMTP_LOGIN', '')
-EMAIL_HOST_PASSWORD = os.environ.get('MAILGUN_SMTP_PASSWORD', '')
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.environ['MAILGUN_SMTP_SERVER']
+EMAIL_PORT = os.environ['MAILGUN_SMTP_PORT']
+EMAIL_HOST_USER = os.environ['MAILGUN_SMTP_LOGIN']
+EMAIL_HOST_PASSWORD = os.environ['MAILGUN_SMTP_PASSWORD']
+EMAIL_USE_TLS = True
+
+
+old_get_email_context = UserStatus.get_email_context
+
+
+def new_get_email_context(self, info, path, action, **kwargs):
+    values = old_get_email_context(self, info, path, action, **kwargs)
+    import logging
+    logger = logging.getLogger('testlogger')
+    logger.info('Values returned: ' + repr(values))
+    return values
+
+
+UserStatus.get_email_context = new_get_email_context

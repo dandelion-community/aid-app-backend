@@ -12,8 +12,6 @@ class AidRequestAdmin(admin.ModelAdmin):
         'who_is_it_for_freeform_text',
         'who_recorded_it_username',
         'zip_code',
-        'who_is_it_for',
-        'who_recorded_it',
     )
 
 

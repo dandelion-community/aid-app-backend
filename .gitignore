@@ -4,3 +4,4 @@
 getting-started
 staticfiles
 db.sqlite3
+.env

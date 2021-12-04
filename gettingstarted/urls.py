@@ -18,7 +18,6 @@ admin.autodiscover()
 
 urlpatterns = [
     path("", hello.views.index, name="index"),
-    path("db/", hello.views.db, name="db"),
     path('accounts/', include('django_registration.backends.activation.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('activate/<str:activation_key>', views.activate, name="activate"),

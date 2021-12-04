@@ -9,6 +9,8 @@ django-heroku = "*"
 Django = "*"
 graphene-django = "*"
 django-filter = "*"
+django-graphql-auth = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 django-stubs = "*"

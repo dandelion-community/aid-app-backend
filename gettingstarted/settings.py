@@ -151,11 +151,16 @@ LOGGING = {
 # EMAIL_BACKEND = 'gettingstarted.mailgun.django_mailgun.MailgunBackend'
 # MAILGUN_ACCESS_KEY = os.environ['MAILGUN_API_KEY']
 # MAILGUN_SERVER_NAME = os.environ['MAILGUN_SMTP_SERVER']
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-EMAIL_HOST = os.environ['MAILGUN_SMTP_SERVER']
-EMAIL_PORT = 587
-EMAIL_HOST_USER = os.environ['MAILGUN_SMTP_LOGIN']
-EMAIL_HOST_PASSWORD = os.environ['MAILGUN_SMTP_PASSWORD']
-EMAIL_USE_TLS = True
-EMAIL_FROM = EMAIL_HOST_USER
+###
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# EMAIL_HOST = os.environ['MAILGUN_SMTP_SERVER']
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = os.environ['MAILGUN_SMTP_LOGIN']
+# EMAIL_HOST_PASSWORD = os.environ['MAILGUN_SMTP_PASSWORD']
+# EMAIL_USE_TLS = True
+# EMAIL_FROM = EMAIL_HOST_USER
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

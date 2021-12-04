@@ -10,11 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
+from graphql_auth.models import UserStatus
 import os
 from datetime import timedelta
 
 import django_heroku
-from graphql_auth.models import UserStatus
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -196,3 +196,17 @@ EMAIL_PORT = os.environ['MAILGUN_SMTP_PORT']
 EMAIL_HOST_USER = os.environ['MAILGUN_SMTP_LOGIN']
 EMAIL_HOST_PASSWORD = os.environ['MAILGUN_SMTP_PASSWORD']
 EMAIL_USE_TLS = True
+
+
+old_get_email_context = UserStatus.get_email_context
+
+
+def new_get_email_context(self, info, path, action, **kwargs):
+    values = old_get_email_context(self, info, path, action, **kwargs)
+    import logging
+    logger = logging.getLogger('testlogger')
+    logger.info('Values returned: ' + repr(values))
+    return values
+
+
+UserStatus.get_email_context = new_get_email_context

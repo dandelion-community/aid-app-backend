@@ -183,11 +183,8 @@ class MailgunBackend(BaseEmailBackend):
 
         if response.status_code != 200:
             if not self.fail_silently:
-                import logging
-                logger = logging.getLogger('testlogger')
-                logger.info('Email sending failed')
-                logger.info(str(response))
-                logger.info(repr(response))
+                print(response)
+                print(repr(response))
                 raise MailgunAPIError(response)
             return False
 

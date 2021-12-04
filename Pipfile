@@ -12,6 +12,7 @@ django-filter = "*"
 django-graphql-auth = "*"
 django-cors-headers = "*"
 requests = "*"
+django-registration = "*"
 
 [dev-packages]
 django-stubs = "*"

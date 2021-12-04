@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "hello",
+    "graphene_django",
 ]
 
 MIDDLEWARE = [
@@ -117,3 +118,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = "/static/"
 
 django_heroku.settings(locals())
+
+GRAPHENE = {
+    "SCHEMA": "hello.schema.schema"
+}

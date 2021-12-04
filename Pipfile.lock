@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "86b3d4360fa35fb029930aaed163dc7a909c46c3b57cebe07a418043ae0ed4b4"
+            "sha256": "c794291d736327a492df9c5e9598b1851e7a687690c6ba61e69c8a485afb66fc"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -208,6 +208,14 @@
             ],
             "markers": "python_version >= '3.6'",
             "version": "==0.3.1"
+        },
+        "graphene-stubs": {
+            "hashes": [
+                "sha256:d1a1b38c4f4f9f3b97438d9ec57c44ff115103504f0138f99374182f5ea57ca6",
+                "sha256:dfefc5f4bda5eccff3f0a976d804c2a972c631025894b43a48dccae8e78cad1f"
+            ],
+            "index": "pypi",
+            "version": "==0.15"
         },
         "mypy": {
             "hashes": [

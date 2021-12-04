@@ -10,6 +10,17 @@ from graphql_jwt.decorators import login_required  # type: ignore
 
 from .models import AidRequest
 
+old_get_email_context = UserStatus.get_email_context
+
+
+def new_get_email_context(self, info, path, action, **kwargs):
+    values = old_get_email_context(self, info, path, action, **kwargs)
+    logger = logging.getLogger('testlogger')
+    logger.info('Values returned: ' + repr(values))
+    return values
+
+
+UserStatus.get_email_context = new_get_email_context
 
 
 class AidRequestType(DjangoObjectType):

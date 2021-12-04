@@ -1,12 +1,6 @@
 from django.contrib import admin
 
-from .models import AidRequest, AnonymousPerson
-
-
-class AnonymousPersonAdmin(admin.ModelAdmin):
-    list_display = (
-        'user',
-    )
+from .models import AidRequest
 
 
 class AidRequestAdmin(admin.ModelAdmin):
@@ -24,4 +18,3 @@ class AidRequestAdmin(admin.ModelAdmin):
 
 
 admin.site.register(AidRequest, AidRequestAdmin)
-admin.site.register(AnonymousPerson, AnonymousPersonAdmin)

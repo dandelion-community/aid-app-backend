@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-import django_heroku
 
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,7 +27,7 @@ SECRET_KEY = "CHANGE_ME!!!! (P.S. the SECRET_KEY environment variable will be us
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS: list[str] = []
 
 
 # Application definition
@@ -78,7 +78,7 @@ WSGI_APPLICATION = "gettingstarted.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE" : "django.db.backends.sqlite3",
+        "ENGINE": "django.db.backends.sqlite3",
         "NAME": os.path.join(BASE_DIR, "db.sqlite3")
     }
 }

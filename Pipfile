@@ -11,6 +11,7 @@ graphene-django = "*"
 django-filter = "*"
 django-graphql-auth = "*"
 django-cors-headers = "*"
+requests = "*"
 
 [dev-packages]
 django-stubs = "*"

@@ -148,6 +148,6 @@ LOGGING = {
     }
 }
 
-EMAIL_BACKEND = 'mailgun.django_mailgun.MailgunBackend'
+EMAIL_BACKEND = 'gettingstarted.mailgun.django_mailgun.MailgunBackend'
 MAILGUN_ACCESS_KEY = os.environ['MAILGUN_API_KEY']
 MAILGUN_SERVER_NAME = os.environ['MAILGUN_SMTP_SERVER']
